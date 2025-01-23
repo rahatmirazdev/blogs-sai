@@ -12,11 +12,7 @@ const Navbar = async () => {
                     <h1 className="text-3xl font-bold">Blog's</h1>
                     <nav className="flex space-x-4">
                         <Link href="/">Home</Link>
-                        {user ? (
-                          <Link href="/profile">Profile</Link>
-                        ) : (
-                            <Link href="/api/auth/login">Profile</Link>
-                        )}
+                        <Link href="/profile">Profile</Link>
                     </nav>
                     <div className="flex items-center space-x-4">
                         {user ? (

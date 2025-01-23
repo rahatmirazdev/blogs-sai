@@ -1,21 +1,13 @@
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { redirect } from "next/navigation";
 
-export async function middleware(req) {
+export async function middleware() {
     const { getUser } = getKindeServerSession();
     const user = await getUser();
 
     if (!user) {
-        return new Response(null, {
-            status: 302,
-            headers: {
-                Location: "/api/auth/login",
-            },
-        });
+        redirect("/api/auth/login");
     }
-
-    return new Response(null, {
-        status: 200,
-    });
 }
 
 export const config = {
