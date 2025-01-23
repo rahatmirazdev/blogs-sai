@@ -1,18 +1,24 @@
+import ProfileInfo from "@/components/shared/profile/ProfileInfo";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 const Profile = async () => {
     const { getUser } = getKindeServerSession();
     const user = await getUser();
 
+    if (!user) {
+        return (
+            <script>
+                {`window.location.href = "/api/auth/login";`}
+            </script>
+        );
+    }
+
     return (
         <div className="container mx-auto p-4">
             <div className="">
                 <h1 className="text-3xl font-bold">Welcome to your profile!</h1>
                 {user ? (
-                    <div className="mt-4">
-                        <p><strong>Email:</strong> {user.email}</p>
-                        <p><strong>Full Name:</strong> {user?.given_name} {user?.family_name}</p>
-                    </div>
+                    <ProfileInfo />
                 ) : (
                     <p>No user found, Please login first!</p>
                 )}

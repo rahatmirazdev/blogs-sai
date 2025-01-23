@@ -13,7 +13,7 @@ const Navbar = async () => {
                     <nav className="flex space-x-4">
                         <Link href="/">Home</Link>
                         {user ? (
-                            <Link href="/profile">Profile</Link>
+                          <Link href="/profile">Profile</Link>
                         ) : (
                             <Link href="/api/auth/login">Profile</Link>
                         )}
