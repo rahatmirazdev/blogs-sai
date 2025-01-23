@@ -1,33 +1,57 @@
-import Link from "next/link";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import Link from 'next/link';
+import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
 
 const Navbar = async () => {
+
     const { getUser } = getKindeServerSession();
     const user = await getUser();
 
     return (
-        <div className="bg-gray-800 text-white p-4">
-            <div className="container mx-auto md:px-4">
-                <div className="flex justify-between items-center">
-                    <h1 className="text-3xl font-bold">Blog's</h1>
-                    <nav className="flex space-x-4">
-                        <Link href={"/"}>Home</Link>
-                        <Link href={"/profile"}>Profile</Link>
-                    </nav>
-                    <div className="flex items-center space-x-4">
-                        {user ? (
-                            <>
-                                <span>{user.family_name}</span>
-                                <Link href={"api/auth/logout"} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Sign Out</Link>
-                            </>
-                        ) : (
-                            <>
-                                <Link href={"api/auth/login"} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Sign In</Link>
-                                <Link href={"api/auth/register"} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Sign Up</Link>
-                            </>
-                        )}
+        <div className="navbar bg-base-100">
+            <div className="navbar-start">
+                <div className="dropdown">
+                    <div tabIndex="0" role="button" className="btn btn-ghost btn-circle">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-5 w-5"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M4 6h16M4 12h16M4 18h7"
+                            />
+                        </svg>
                     </div>
+                    <ul
+                        tabIndex="0"
+                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+                    >
+                        <li>
+                            <Link href="/">Home</Link>
+                        </li>
+                        <li>
+                            <Link href="/profile">Profile</Link>
+                        </li>
+                    </ul>
                 </div>
+            </div>
+            <div className="navbar-center">
+                <a className="btn btn-ghost text-xl">Blog's</a>
+            </div>
+            <div className="navbar-end">
+                {user ? (
+                    <Link href="/api/auth/logout" className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                        Sign Out
+                    </Link>
+                ) : (
+                    <Link href="/api/auth/login" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        Sign In
+                    </Link>
+                )}
             </div>
         </div>
     );
