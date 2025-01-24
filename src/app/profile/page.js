@@ -1,14 +1,8 @@
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
-import { redirect } from 'next/navigation';
 
 const Profile = async () => {
-    const { getUser, isAuthenticated } = getKindeServerSession();
+    const { getUser } = getKindeServerSession();
     const user = await getUser();
-    const isAuth = await isAuthenticated();
-    
-    if (!isAuth) {
-        redirect('/api/auth/login');
-    }
 
     return (
         <div className="container mx-auto p-4">
