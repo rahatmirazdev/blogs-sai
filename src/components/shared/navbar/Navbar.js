@@ -3,6 +3,7 @@ import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
 import { LogoutLink, LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { FaBarsStaggered } from "react-icons/fa6";
 import { FaUser, FaHome } from "react-icons/fa";
+import ThemeToggle from "@/components/ui/ThemeToggle";
 
 const Navbar = async () => {
 
@@ -13,13 +14,13 @@ const Navbar = async () => {
         return (
             <>
                 <li>
-                    <Link href="/" className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200">
+                    <Link href="/" className="flex items-center gap-2 px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-gray-800 rounded-lg transition-all duration-200">
                         <FaHome className="text-sm" />
                         Home
                     </Link>
                 </li>
                 <li>
-                    <Link href="/profile" className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200">
+                    <Link href="/profile" className="flex items-center gap-2 px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-gray-800 rounded-lg transition-all duration-200">
                         <FaUser className="text-sm" />
                         Profile
                     </Link>
@@ -40,7 +41,7 @@ const Navbar = async () => {
     }
 
     return (
-        <div className='bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50 backdrop-blur-sm bg-white/90'>
+        <div className='bg-white/90 dark:bg-gray-900/90 shadow-sm border-b border-gray-100 dark:border-gray-800 sticky top-0 z-50 backdrop-blur-sm transition-colors duration-300'>
             <div className='container mx-auto px-4'>
                 <div className="flex items-center justify-between h-16">
                     {/* Logo */}
@@ -53,15 +54,19 @@ const Navbar = async () => {
                     {/* Desktop Navigation */}
                     <div className="hidden md:flex items-center space-x-2">
                         <Navlinks />
+                        <div className="ml-2">
+                            <ThemeToggle />
+                        </div>
                     </div>
                     
                     {/* Mobile Menu Button */}
-                    <div className="md:hidden">
+                    <div className="md:hidden flex items-center space-x-2">
+                        <ThemeToggle />
                         <div className="dropdown dropdown-bottom dropdown-end">
-                            <div tabIndex="0" role="button" className="btn btn-ghost btn-circle hover:bg-blue-50">
-                                <FaBarsStaggered className="text-xl text-gray-700" />
+                            <div tabIndex="0" role="button" className="btn btn-ghost btn-circle hover:bg-blue-50 dark:hover:bg-gray-800">
+                                <FaBarsStaggered className="text-xl text-gray-700 dark:text-gray-300" />
                             </div>
-                            <ul className="dropdown-content menu bg-white rounded-xl shadow-lg border border-gray-100 z-[1] w-52 p-3 mt-2">
+                            <ul className="dropdown-content menu bg-white dark:bg-gray-900 rounded-xl shadow-lg border border-gray-100 dark:border-gray-800 z-[1] w-52 p-3 mt-2">
                                 <Navlinks />
                             </ul>
                         </div>
